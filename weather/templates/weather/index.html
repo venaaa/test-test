@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>Weather App</title>
+</head>
+<body>
+{#    Шапка   #}
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h5 class="my-0 mr-md-auto font-weight-normal">WeatherApp</h5>
+        <nav class="my-2 my-md-0 mr-md-3">
+            <a class="p-2 text-dark" href="#">Главная</a>
+            <a class="p-2 text-dark" href="#">Информаця</a>
+        </nav>
+        <a class="btn btn-outline-primary" href="#">Документация</a>
+    </div>
+{#   / Шапка   #}
+
+{# MainBlock #}
+    <section class="section-outer section-weathapp">
+        <div class="section-inner">
+            <div class="section-weathapp-container container mt-5">
+                <div class="section-weathapp-wrapper">
+                    <div class="row">
+                        <div class="col-4 col-lg-4">
+                            <h1>Выбор города:</h1>
+
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <label for="city">Город</label>
+                                {{ form.name }}
+                                <input type="submit" name="send" value="Узнать" class="mt-2 btn btn-danger">
+                            </form>
+                        </div>
+                        <div class="col-6 col-lg-6 offset-lg-2">
+                            <h1>Информация</h1>
+
+                            {% for info in all_info %}
+
+                            <div class="mt-4 alert alert-info">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <b>City:</b> {{ info.city }} <br>
+                                        <b>Temp:</b> {{ info.temp }} <sup>o</sup> <br>
+                                    </div>
+                                    <div class="col-2 offset-1">
+                                        <img src="http://openweathermap.org/img/w/{{ info.icon }}.png" alt="weather icon"
+                                             class="img-thumbnail">
+                                    </div>
+                                </div>
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-outer section-weathermap">
+        <div class="section-inner">
+            <div class="section-weathermap-container container">
+                <div class="section-weathermap-wrapper">
+
+                </div>
+            </div>
+        </div>
+    </section>
+{# / mainblock #}
+</body>
+</html>
